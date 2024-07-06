@@ -1,16 +1,24 @@
-
+'use client'
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import Image from "next/image"
+import { useRouter } from "next/navigation"
 
 export function LoginComponent() {
+  const router = useRouter();
   return (
-    <div className="flex min-h-screen w-full items-center justify-center bg-gradient-to-br from-primary/30 to-secondary/30">
+    <div className="flex min-h-screen w-full items-center justify-center bg-gradient-to-br from-primary/30 to-secondary/30 text-primary">
       <div className="grid max-w-md grid-cols-1 gap-6 rounded-2xl bg-background/60 p-8 backdrop-blur-md">
-        <div className="space-y-2 text-center">
-          <PinIcon className="mx-auto h-12 w-12 text-primary animate-pulse" />
-          <h2 className="text-3xl font-bold tracking-tight text-foreground">Bienvenido Municipio</h2>
+        <div className="space-y-2 text-center flex flex-col justify-center items-center">
+          <Image
+            src="/logo_ibarra.png"
+            width={150}
+            height={80}
+            alt="logo"
+          />
+          <h2 className="text-3xl font-bold tracking-tight text-foreground">Bienvenido/a</h2>
           <p className="text-muted-foreground">Secure your financial future with our cutting-edge solutions.</p>
         </div>
         <div className="grid gap-2">
@@ -30,7 +38,7 @@ export function LoginComponent() {
           </div>
           <div className="grid gap-1">
             <Label htmlFor="password" className="sr-only">
-            Contraseña
+              Contraseña
             </Label>
             <Input
               id="password"
@@ -42,15 +50,18 @@ export function LoginComponent() {
               className="rounded-full bg-background/80 backdrop-blur-sm transition-colors hover:bg-background/90 focus:bg-background"
             />
           </div>
-          <Button className="w-full rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/20 transition-colors hover:bg-primary/90">
-          Acceso
+          <Button onClick={(e) => {
+            e.preventDefault();
+            router.push("/dashboard")
+          }} className="w-full rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/20 transition-colors hover:bg-primary/90">
+            Acceso
           </Button>
         </div>
-      
-      
+
+
         <div className="text-center text-sm text-muted-foreground">
           <Link href="#" className="hover:text-primary hover:underline underline-offset-4" prefetch={false}>
-          ¿Olvidaste tu contraseña?
+            ¿Olvidaste tu contraseña?
           </Link>
         </div>
       </div>
@@ -60,7 +71,7 @@ export function LoginComponent() {
 
 
 
-function PinIcon(props:any) {
+function PinIcon(props: any) {
   return (
     <svg
       {...props}
